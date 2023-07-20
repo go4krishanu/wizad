@@ -1,0 +1,1143 @@
+<html>
+  <body>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        #loading-spinner2 {
+  display: none; /* Initially hide the spinner */
+  
+  }
+  
+.spinner {
+  -webkit-animation: rotate 2s linear infinite;
+          animation: rotate 2s linear infinite;
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -25px 0 0 -25px;
+  width: 50px;
+  height: 50px;
+}
+.spinner .path {
+  stroke: #93bfec;
+  stroke-linecap: round;
+  -webkit-animation: dash 1.5s ease-in-out infinite;
+          animation: dash 1.5s ease-in-out infinite;
+}
+
+@-webkit-keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        padding: 20px;
+      }
+      #msform {
+        text-align: center;
+        position: relative;
+        margin-top: 20px;
+      }
+
+      #msform .wizardgreat {
+        background: white;
+        border-radius: 20px;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0 0% 0px 0%;
+        overflow: hidden;
+        /*stacking fieldsets above each other*/
+        position: relative;
+      }
+
+      #msform fieldset {
+        background: white;
+        border: 0 none;
+        border-radius: 0.5rem;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        padding-bottom: 20px;
+
+        /*stacking fieldsets above each other*/
+        position: relative;
+      }
+
+      /*Hide all except first fieldset*/
+      #msform fieldset:not(:first-of-type) {
+        display: none;
+      }
+
+      #msform fieldset .form-card {
+        text-align: left;
+        color: #9e9e9e;
+      }
+
+      #msform input,
+      #msform textarea {
+        padding: 0px 8px 4px 8px;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        border-radius: 0px;
+        margin-bottom: 25px;
+        margin-top: 2px;
+        width: 100%;
+        box-sizing: border-box;
+        font-family: montserrat;
+        color: #2c3e50;
+        font-size: 16px;
+        letter-spacing: 1px;
+      }
+
+      #msform input:focus,
+      #msform textarea:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: none;
+        font-weight: bold;
+        border-bottom: 2px solid skyblue;
+        outline-width: 0;
+      }
+
+      /*Blue Buttons*/
+      #msform .action-button {
+        width: 150px;
+        background: #046bd2;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: white;
+        border: 0 none;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 12px 10px;
+        margin: 10px 1px 10px;
+        float: right;
+      }
+
+      #msform .action-button:hover,
+      #msform .action-button:focus {
+        box-shadow: none;
+      }
+
+      /*Previous Buttons*/
+      #msform .action-button-previous {
+        width: 150px;
+        background: #046bd2;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: white;
+        border: 0 none;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 12px 10px;
+        margin: 20px 1px 10px;
+        float: right;
+      }
+
+      #msform .action-button-previous:hover,
+      #msform .action-button-previous:focus {
+        box-shadow: none;
+      }
+
+      /*Dropdown List Exp Date*/
+      select.list-dt {
+        border: none;
+        outline: 0;
+        border-bottom: 1px solid #ccc;
+        padding: 2px 5px 3px 5px;
+        margin: 2px;
+      }
+
+      select.list-dt:focus {
+        border-bottom: 2px solid skyblue;
+      }
+
+      /*The background card*/
+      .card {
+        z-index: 0;
+        border: none;
+        border-radius: 0.5rem;
+        position: relative;
+      }
+
+      /*FieldSet headings*/
+      .fs-title {
+        font-size: 40px;
+        font-weight: 600;
+        color: #0b5a23;
+        margin-bottom: 30px;
+        text-align: left;
+      }
+
+      /*progressbar*/
+      #progressbar {
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: lightgrey;
+      }
+
+      #progressbar .active {
+        color: #000000;
+      }
+
+      #progressbar li {
+        list-style-type: none;
+        font-size: 12px;
+        width: 25%;
+        float: left;
+        position: relative;
+      }
+
+      /*Icons in the ProgressBar*/
+      #progressbar #account:before {
+        font-family: FontAwesome;
+        content: "\f023";
+      }
+
+      #progressbar #personal:before {
+        font-family: FontAwesome;
+        content: "\f007";
+      }
+
+      #progressbar #payment:before {
+        font-family: FontAwesome;
+        content: "\f09d";
+      }
+
+      #progressbar #confirm:before {
+        font-family: FontAwesome;
+        content: "\f00c";
+      }
+
+      /*ProgressBar before any progress*/
+      #progressbar li:before {
+        width: 50px;
+        height: 50px;
+        line-height: 45px;
+        display: block;
+        font-size: 18px;
+        color: #ffffff;
+        background: lightgray;
+        border-radius: 50%;
+        margin: 0 auto 10px auto;
+        padding: 2px;
+      }
+
+      /*ProgressBar connectors*/
+      #progressbar li:after {
+        content: "";
+        width: 100%;
+        height: 2px;
+        background: lightgray;
+        position: absolute;
+        left: 0;
+        top: 25px;
+        z-index: -1;
+      }
+
+      /*Color number of the step and the connector before it*/
+      #progressbar li.active:before,
+      #progressbar li.active:after {
+        background: skyblue;
+      }
+
+      /*Imaged Radio Buttons*/
+      .radio-group {
+        position: relative;
+        margin-bottom: 25px;
+      }
+
+      .radio {
+        display: inline-block;
+        width: 204;
+        height: 104;
+        border-radius: 0;
+        background: lightblue;
+        box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+        cursor: pointer;
+        margin: 8px 2px;
+      }
+
+      .radio:hover {
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .radio.selected {
+        box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      /*Fit image in bootstrap div*/
+      .fit-image {
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .wizard .content .purpose-radio {
+        position: relative;
+        display: inline-block;
+      }
+      .wizard .content .purpose-radio .purpose-radio-input {
+        position: absolute;
+        opacity: 0;
+      }
+      .wizard
+        .content
+        .purpose-radio
+        .purpose-radio-input:checked
+        + .purpose-radio-label {
+        border-color: #0b5a23;
+        background: #0b5a23;
+      }
+      .wizard
+        .content
+        .purpose-radio
+        .purpose-radio-input:checked
+        + .purpose-radio-label
+        .label-icon {
+        color: #fff;
+      }
+      .wizard
+        .content
+        .purpose-radio
+        .purpose-radio-input:checked
+        + .purpose-radio-label
+        .label-icon
+        .label-icon-default {
+        display: none;
+      }
+      .wizard
+        .content
+        .purpose-radio
+        .purpose-radio-input:checked
+        + .purpose-radio-label
+        .label-icon
+        .label-icon-active {
+        display: inline-block;
+      }
+      .wizard
+        .content
+        .purpose-radio
+        .purpose-radio-input:checked
+        + .purpose-radio-label
+        .label-text {
+        color: #fff;
+      }
+      .lowheight100 .content .purpose-radio .purpose-radio-label {
+        height: 95px !important;
+      }
+      .lowheight100 .content .purpose-radio .rollimg {
+        padding-top: 10px !important;
+      }
+
+      .lowheight120 .content .purpose-radio .purpose-radio-label {
+        height: 120px !important;
+      }
+      .lowheight120 .content .purpose-radio .rollimg {
+        padding-top: 20px !important;
+      }
+
+      .wizard .content .purpose-radio .purpose-radio-label {
+        position: relative;
+        margin-bottom: 4% !important;
+        background: #fff;
+        display: -webkit-box;
+        display: flex;
+        width: 100%;
+        height: 184px;
+        max-width: 100%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .wizard .content .purpose-radio:nth-child(1) .purpose-radio-label {
+        border: 4px solid #385723;
+      }
+      .wizard .content .purpose-radio:nth-child(2) .purpose-radio-label {
+        border: 4px solid #548235;
+      }
+      .wizard .content .purpose-radio:nth-child(3) .purpose-radio-label {
+        border: 4px solid #94ba81;
+      }
+      .wizard .content .purpose-radio:nth-child(4) .purpose-radio-label {
+        border: 4px solid #c5e0b4;
+      }
+      @media (max-width: 575px) {
+        .wizard .content .purpose-radio .purpose-radio-label {
+          width: 100%;
+        }
+      }
+      .wizard .content .purpose-radio .purpose-radio-label .label-icon {
+        font-size: 21px;
+        color: #000000;
+        margin-bottom: 17px;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+      }
+      .wizard
+        .content
+        .purpose-radio
+        .purpose-radio-label
+        .label-icon
+        .label-icon-active {
+        display: none;
+      }
+      .wizard .content .purpose-radio .rollimg {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        bottom: 0px;
+        padding: 0;
+        width: 33%;
+        overflow: hiddens;
+      }
+      .wizard .content .purpose-radio .rollimg img {
+        width: 100%;
+      }
+      .wizard .content .purpose-radio .purpose-radio-label .label-text {
+        font-size: 21px;
+        width: 100%;
+        padding-left: 36%;
+        padding-right: 20px;
+        color: #030303;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+      }
+      .wizard .content .purpose-radios-wrapper {
+        margin-top: 20px;
+        margin-left: -1%;
+        margin-right: -1%;
+      }
+      .wizard .content .purpose-radios-wrapper .purpose-radio {
+        width: 99%;
+        float: left;
+        margin-left: 1%;
+        margin-right: 1%;
+      }
+      @media (max-width: 575px) {
+        .wizard .content .purpose-radios-wrapper .purpose-radio {
+          margin-right: 0;
+          margin-bottom: 18px;
+          width: 100%;
+          max-width: none;
+        }
+      }
+      .wizard .content .purpose-radios-wrapper .purpose-radio:last-child {
+        margin-right: 0;
+      }
+      .wizard .content .form-control {
+        padding: 26px 25px;
+        min-height: 50px;
+        max-width: 550px;
+        border-radius: 4px;
+        border: solid 1px #ececec;
+      }
+      .wizard .content .form-control::-webkit-input-placeholder {
+        color: #919aa3;
+      }
+      .wizard .content .form-control::-moz-placeholder {
+        color: #919aa3;
+      }
+      .wizard .content .form-control:-ms-input-placeholder {
+        color: #919aa3;
+      }
+      .wizard .content .form-control::-ms-input-placeholder {
+        color: #919aa3;
+      }
+      .wizard .content .form-control::placeholder {
+        color: #919aa3;
+      }
+
+      .ngtn {
+        float: left;
+        padding: 25px 0px 0px;
+        margin: 0px;
+      }
+      .ngtn li {
+        float: left;
+        width: 35px;
+        list-style: none;
+        font-size: 18px;
+        padding: 0px;
+        height: 35px;
+        line-height: 35px;
+        margin: 5px 2px 5px;
+      }
+      .ngtn li.activeg {
+        border: 1px solid #0b5a23;
+        color: #0b5a23;
+        border-radius: 50px;
+        font-weight: 600;
+      }
+      .purpose-radios-wrapper1 {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+      .wizard
+        .content
+        .purpose-radios-wrapper1
+        .purpose-radio
+        .purpose-radio-label
+        .label-text {
+        padding-left: 15%;
+      }
+      .purpose-radios-wrapper1 .qeustion-img {
+        width: 34%;
+      }
+      .purpose-radios-wrapper1 .qeustion-ans {
+        width: 70%;
+      }
+      .purpose-radios-wrapper1 .qeustion-ans div {
+        min-width: 50% !important;
+        width: auto;
+        float: none !important;
+      }
+      .fieldset2 .action-button {
+        float: none !important;
+        /* position: relative;
+        left: 30%;
+        top: -3px;
+        margin-top: -10% !important; */
+      }
+      .nav_button text-right {
+        width: 100%;
+        padding-left: 1%;
+      }
+      .fieldset2 .qeustion-ans div {
+        width: 80% !important;
+      }
+    </style>
+    <div id="loading-spinner2">
+      <svg class="spinner" viewBox="0 0 50 50">
+        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+      </svg>
+    </div>
+    <!-- MultiStep Form -->
+    
+    <div class="container-fluid" id="grad1">
+      <div class="justify-content-center mt-0">
+        <div class="">
+          <div class="">
+            <div class=" ">
+              <div class=" ">
+                <form name="form" id="msform">
+                  <!-- progressbar -->
+                  <!-- fieldsets -->
+                  <fieldset class="wizard wizardgreat fieldset2 lowheight100">
+                    <div class="form-card content">
+                      <h2 class="fs-title">
+                        Q1: Which statement BEST describes your use of mobility aids? 
+                      </h2>
+                      <div
+                        class="purpose-radios-wrapper purpose-radios-wrapper1"
+                      >
+                        <div class="qeustion-img">
+                          <img
+                            src="https://upright.altura.health/wp-content/uploads/2023/06/Need-help-1.png"
+                            alt=""
+                            width="100%"
+                          />
+                        </div>
+
+                        <div class="qeustion-ans">
+                            <div class="purpose-radio div1">
+                              <input
+                                type="radio"
+                                name="mobility"
+                                id="mobilityaid_all"
+                                class="purpose-radio-input"
+                                value="a"
+                                required="required"
+                              />
+                              <label for="mobilityaid_all" class="purpose-radio-label">
+                                <span class="label-text"
+                              >I use a mobility aid in nearly all situations.</span
+                            >
+                              </label>
+                            </div>
+                            <div class="purpose-radio div2">
+                                <input
+                                  type="radio"
+                                  name="mobility"
+                                  id="mobilityaid_sometime"
+                                  class="purpose-radio-input"
+                                  value="b"
+                                  required="required"
+                                />
+                                <label for="mobilityaid_sometime" class="purpose-radio-label">
+                                    <span class="label-text"
+                                    >I use a mobility aid
+                                     sometimes.</span
+                                  >
+                                </label>
+                              </div>
+                              <div class="purpose-radio div3">
+                                <input
+                                  type="radio"
+                                  name="mobility"
+                                  id="have_dont_use"
+                                  class="purpose-radio-input"
+                                  value="c"
+                                  required="required"
+                                />
+                                <label for="have_dont_use" class="purpose-radio-label">
+                                    <span class="label-text"
+                                    >
+                                      I've been advised to use a mobility aid but I don't use one currently.</span
+                                  >
+                                </label>
+                              </div>
+                              <div class="purpose-radio div4">
+                                <input
+                                  type="radio"
+                                  name="mobility"
+                                  id="havent_dont_use"
+                                  class="purpose-radio-input"
+                                  value="d"
+                                  required="required"
+                                />
+                                <label for="havent_dont_use" class="purpose-radio-label">
+                                    <span class="label-text">I haven't been advised to use a mobility aid
+                                     and I don't use one currently.</span
+                                  >
+                                </label>
+                              </div>
+                              <div class="nav_button text-right">
+                                <input
+                                  type="button"
+                                  name="make_payment"
+                                  class="next action-button"
+                                  value="Next"
+                                />
+                              </div>
+
+                        <!-- <div class="purpose-radio">
+                          <input
+                            type="radio"
+                            name="purpose"
+                            id="outchair"
+                            class="purpose-radio-input"
+                            value="a"
+                            required="required"
+                          />
+                          <label for="outchair" class="purpose-radio-label">
+                            <div class="rollimg">
+                              <img
+                                src="https://upright.altura.health/wp-content/uploads/2023/06/Need-help.png"
+                                width="100%"
+                              />
+                            </div>
+                            <span class="label-text"
+                              ><strong>I need help</strong><br />getting in and
+                              out of a chair</span
+                            >
+                          </label>
+                        </div> -->
+                        <!-- <div class="purpose-radio">
+                          <input
+                            type="radio"
+                            name="purpose"
+                            id="arms"
+                            class="purpose-radio-input"
+                            value="b"
+                          />
+                          <label for="arms" class="purpose-radio-label">
+                            <div class="rollimg">
+                              <img
+                                src="https://upright.altura.health/wp-content/uploads/2023/06/need-to-rock.png"
+                                width="100%"
+                              />
+                            </div>
+                            <span class="label-text"
+                              ><strong>I need to rock</strong><br />
+                              or use my arms to get up out of a chair</span
+                            >
+                          </label>
+                        </div> -->
+                        <!-- <div class="purpose-radio">
+                          <input
+                            type="radio"
+                            name="purpose"
+                            id="hard"
+                            class="purpose-radio-input"
+                            value="c"
+                          />
+                          <label for="hard" class="purpose-radio-label">
+                            <div class="rollimg">
+                              <img
+                                src="https://upright.altura.health/wp-content/uploads/2023/06/Ican-getup.png"
+                                width="100%"
+                              />
+                            </div>
+                            <span class="label-text"
+                              ><strong
+                                >I can get up out of a chair without using my
+                                arms</strong
+                              >, but sometimes it's hard</span
+                            >
+                          </label>
+                        </div> -->
+                        <!-- <div class="purpose-radio">
+                          <input
+                            type="radio"
+                            name="purpose"
+                            id="trouble"
+                            class="purpose-radio-input"
+                            value="d"
+                          />
+                          <label for="trouble" class="purpose-radio-label">
+                            <div class="rollimg">
+                              <img
+                                src="https://upright.altura.health/wp-content/uploads/2023/06/dont-trouble.png"
+                                width="100%"
+                              />
+                            </div>
+                            <span class="label-text"
+                              ><strong
+                                >I don't have any trouble getting up</strong
+                              >
+                              from a chair</span
+                            >
+                          </label>
+                        </div> -->
+                      </div>
+                    </div>
+                    <!-- <div class="nav_button text-right">
+                      <input
+                        type="button"
+                        name="validateFoo"
+                        class="next action-button"
+                        value="Next"
+                      />
+                    </div> -->
+                    <!-- <input
+                      type="button"
+                      name="validateFoo"
+                      class="next action-button"
+                      value="Next"
+                    /> -->
+                  </fieldset>
+                  <fieldset class="wizard wizardgreat fieldset2 lowheight100">
+                    <div class="form-card content">
+                      <h2 class="fs-title">
+                        Q2: Which statement BEST describes your physical activity?
+                      </h2>
+
+                      <div
+                        class="purpose-radios-wrapper purpose-radios-wrapper1"
+                      >
+                        <div class="qeustion-img">
+                          <img
+                            src="https://upright.altura.health/wp-content/uploads/2023/06/Walking-Aid-crop.png"
+                            alt=""
+                            width="100%"
+                          />
+                        </div>
+                        <div class="qeustion-ans">
+                          <div class="purpose-radio div1">
+                            <input
+                              type="radio"
+                              name="mobility"
+                              id="usually"
+                              class="purpose-radio-input"
+                              value="a"
+                              required="required"
+                            />
+                            <label for="usually" class="purpose-radio-label">
+                              <span class="label-text">I rarely do physical activity.  It is difficult for me.</span>
+                            </label>
+                          </div>
+                          <div class="purpose-radio div2">
+                            <input
+                              type="radio"
+                              name="mobility"
+                              id="sometimes"
+                              class="purpose-radio-input"
+                              value="b"
+                            />
+                            <label for="sometimes" class="purpose-radio-label">
+                              <span class="label-text">Most weeks I do light activities like housework, casual walking, or stretching.</span>
+                            </label>
+                          </div>
+                          <div class="purpose-radio div3">
+                            <input
+                              type="radio"
+                              name="mobility"
+                              id="rarely"
+                              class="purpose-radio-input"
+                              value="c"
+                            />
+                            <label for="rarely" class="purpose-radio-label">
+                              <span class="label-text">Every week I do some activities that raise my heart rate like fast walking.</span>
+                            </label>
+                          </div>
+                          <div class="purpose-radio div4">
+                            <input
+                              type="radio"
+                              name="mobility"
+                              id="never"
+                              class="purpose-radio-input"
+                              value="d"
+                            />
+                            <label for="never" class="purpose-radio-label">
+                              <span class="label-text">At least 3-5 days every week I do activities that raise my heart rate like fast walking.</span>
+                            </label>
+                          </div>
+                          <div class="nav_button text-right">
+                            <input
+                              type="button"
+                              name="make_payment"
+                              class="next action-button"
+                              value="Next"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <input
+                      type="button"
+                      name="next"
+                      class="next action-button"
+                      value="Next"
+                    /> -->
+                  </fieldset>
+                  <fieldset
+                    class="wizard wizardgreat fieldset2 fieldset2 lowheight100"
+                  >
+                    <div class="form-card content">
+                      <h2 class="fs-title">
+                        Q3: Which statement BEST describes your ability to stand up from a chair?
+                      </h2>
+                      <div
+                        class="purpose-radios-wrapper purpose-radios-wrapper1"
+                      >
+                        <div class="qeustion-img">
+                          <img
+                            src="https://upright.altura.health/wp-content/uploads/2023/06/Physical-Activity-2-crop.png"
+                            alt=""
+                            width="100%"
+                          />
+                        </div>
+                        <div class="qeustion-ans">
+                          <div class="purpose-radio div2">
+                            <input
+                              type="radio"
+                              name="physical"
+                              id="helpgetting_inandout"
+                              class="purpose-radio-input"
+                              value="a"
+                              required="required"
+                            />
+                            <label for="helpgetting_inandout" class="purpose-radio-label">
+                              <span class="label-text">I need help getting in and out of a chair.</span>
+                            </label>
+                          </div>
+                          <div class="purpose-radio div3">
+                            <input
+                              type="radio"
+                              name="physical"
+                              id="need_torock"
+                              class="purpose-radio-input"
+                              value="b"
+                            />
+                            <label for="need_torock" class="purpose-radio-label">
+                              <span class="label-text"
+                                >I need to rock or use my arms to get up out of a chair.</span
+                              >
+                            </label>
+                          </div>
+                          <div class="purpose-radio div4">
+                            <input
+                              type="radio"
+                              name="physical"
+                              id="can_getup"
+                              class="purpose-radio-input"
+                              value="c"
+                            />
+                            <label for="can_getup" class="purpose-radio-label">
+                              <span class="label-text"
+                                >I can get up out of a chair without using my arms, but sometimes it's hard.</span
+                              >
+                            </label>
+                          </div>
+                          <div class="purpose-radio div5">
+                            <input
+                              type="radio"
+                              name="physical"
+                              id="no_trouble"
+                              class="purpose-radio-input"
+                              value="d"
+                            />
+                            <label for="no_trouble" class="purpose-radio-label">
+                              <span class="label-text"
+                                >I don't have any trouble getting up from a chair.</span
+                              >
+                            </label>
+                          </div>
+                          <div class="nav_button text-right">
+                            <input
+                              type="button"
+                              name="make_payment"
+                              class="next action-button"
+                              value="Submit"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <fieldset class="wizardgreat fieldset2">
+                    <div class="form-card">
+                      <br /><br />
+                      <div class="row justify-content-center">
+                        <div
+                          class="text-center"
+                          style="
+                            border-radius: 20px;
+                            width: 100%;
+                            max-width: 500px;
+                            padding: 40px 20px;
+                            margin-bottom: 40px;
+                          "
+                        >
+                          <img
+                            src="https://upright.altura.health/wp-content/uploads/2023/06/lvl.jpg"
+                            width="90px"
+                            style="margin-bottom: 40px"
+                          />
+                          <h5
+                            style="
+                              font-size: 30px;
+                              color: #111;
+                              font-weight: 600;
+                              margin-bottom: 40px;
+                            "
+                          >
+                            Your activity <span id="activity_level_ans"></span>
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        const loadingSpinner2 = document.getElementById('loading-spinner2');
+      // Show the spinner when the fetch request starts
+      loadingSpinner2.style.display = 'none';
+
+        var current_fs, next_fs, previous_fs; //fieldsets
+        var opacity;
+        var answer = "";
+        var i = 1;
+        $(".next").click(function () {
+          current_fs = $(this).parents("fieldset");
+          // alert($(current_fs).prop("nodeName"));
+          next_fs = $(current_fs).next();
+          var selectedValue = $(current_fs)
+            .find('input[type="radio"]:checked')
+            .val();
+          answer += i + selectedValue;
+          i++;
+        //   alert(answer);
+          if (i == 4) {
+            loadingSpinner2.style.display = 'block';
+
+            /// API Calling
+            // fetch(
+            //   "https://api-altura.azurewebsites.net/api/upright/GetLevelNameBy?data=" +
+            //     answer
+            // )
+            //   .then((response) => response.json())
+            //   .then((data) => {
+            //     // Handle the response data hereg
+            //     console.log(data);
+
+
+            //     var data = JSON.parse(data);
+            //         var responseData = data.Response.ResponseData;
+            //         console.log(responseData);
+            //   })
+            //   .catch((error) => {
+            //     // Handle any errors that occur during the fetch request
+            //     console.log("Error:", error);
+            //   });
+              
+            fetch("https://api-altura.azurewebsites.net/api/upright/GetLevelNameBy?data=" + answer)
+                .then((response) => response.json())
+                .then((responseData) => {
+                    // Handle the response data here
+                    console.log(responseData);
+
+                    // You don't need to parse the data again since it's already parsed in the previous step
+                    var levelName = responseData.Response.ResponseData;
+                    console.log(levelName);
+                                        if(levelName !=""){
+                                          loadingSpinner2.style.display = 'none';
+                    document.getElementById('activity_level_ans').innerText= levelName;
+                    }
+                    else{
+                      loadingSpinner2.style.display = 'none';
+                      document.getElementById('activity_level_ans').innerText= "- Not found";
+                    }
+                    
+                })
+                .catch((error) => {
+                    // Handle any errors that occur during the fetch request
+                    console.log("Error:", error);
+                });
+          }
+          //Add Class Active
+          $("#progressbar li")
+            .eq($("fieldset").index(next_fs))
+            .addClass("active");
+          //show the next fieldset
+          next_fs.show();
+          //hide the current fieldset with style
+          current_fs.animate(
+            { opacity: 0 },
+            {
+              step: function (now) {
+                // for making fielset appear animation
+                opacity = 1 - now;
+                current_fs.css({
+                  display: "none",
+                  position: "relative",
+                });
+                next_fs.css({ opacity: opacity });
+              },
+              duration: 600,
+            }
+          );
+        });
+
+        $(".previous").click(function () {
+          current_fs = $(this).parent();
+          previous_fs = $(this).parent().prev();
+
+          //Remove class active
+          $("#progressbar li")
+            .eq($("fieldset").index(current_fs))
+            .removeClass("active");
+
+          //show the previous fieldset
+          previous_fs.show();
+
+          //hide the current fieldset with style
+          current_fs.animate(
+            { opacity: 0 },
+            {
+              step: function (now) {
+                // for making fielset appear animation
+                opacity = 1 - now;
+
+                current_fs.css({
+                  display: "none",
+                  position: "relative",
+                });
+                previous_fs.css({ opacity: opacity });
+              },
+              duration: 600,
+            }
+          );
+        });
+
+        $(".radio-group .radio").click(function () {
+          $(this).parent().find(".radio").removeClass("selected");
+          $(this).addClass("selected");
+        });
+
+        $(".submit").click(function () {
+          return false;
+        });
+      });
+    </script>
+
+    <script>
+      $(function () {
+        $("#msform").validate({
+          rules: {
+            purpose: { required: true },
+          },
+          messages: {
+            purpose: {
+              required: "Please select<br/>",
+            },
+          },
+          errorPlacement: function (error, element) {
+            if (element.is(":radio")) {
+              error.appendTo(element.parents(".container"));
+            } else {
+              // This is the default behavior
+              error.insertAfter(element);
+            }
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
